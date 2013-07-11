@@ -1,11 +1,11 @@
 === Simple Footnotes Editor Button ===
-Contributors: acusti
+Contributors: acusti, jackdougherty
 Tags: footnotes, endnotes, wysiwig, tinymce, button
 Requires at least: 2.5
 Tested up to: 3.5
 Stable tag: 0.1
 
-Add a button to the TinyMCE editor toolbar to make it easy for users to add footnotes with the proper syntax for the Simple Footnotes plugin.
+Add a button to the TinyMCE editor toolbar to make it easy for users to add footnotes with the proper syntax for the Simple Footnotes plugin; modified to match PressBooks format: [footnote]...[/footnote].
 
 == Description ==
 

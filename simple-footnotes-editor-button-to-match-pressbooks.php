@@ -1,11 +1,11 @@
 <?php
 /*
- * Plugin Name: Simple Footnotes Editor Button
- * Plugin URI: http://wordpress.org/extend/plugins/simple-footnotes-editor-button/
- * Plugin Description: Adds a button to the TinyMCE editor toolbar in the second row that makes it easy for users to add footnotes with the proper syntax.
- * Version: 0.2
- * Author: Andrew Patton
- * Author URI: http://www.purecobalt.com/
+ * Plugin Name: Simple Footnotes Editor Button to match PressBooks
+ * Plugin URI: https://github.com/JackDougherty/simple-footnotes-editor-button-to-match-pressbooks
+ * Plugin Description: Adds a button to the TinyMCE editor toolbar in the second row that makes it easy for users to add footnotes with the proper syntax, to match PressBooks format: [footnote]...[/footnote].
+ * Version: 0.2.1
+ * Author: Andrew Patton; modified by Jack Dougherty
+ * Author URI: http://github.com/jackdougherty
  * License: CC0
  * Text Domain: 
  * Domain Path:
@@ -50,11 +50,11 @@ class simple_footnotes_editor_button {
 	 * @return $settings array of TinyMCE settings
 	 */
 	function add_tinymce_footnote_plugin( $settings ) {
-		// Add a setup function which registers our simple button to prompt a dialog box and insert entered content wrapped with [ref]...[/ref]
+		// Add a setup function which registers our simple button to prompt a dialog box and insert entered content wrapped with [footnote]...[/footnote]
 		// Use inline JS (instead of an external JS file) to simplify translation
 		$setup_function = 'function(ed) {
 			ed.addButton("simple-footnote", {
-				title : "' . __( 'Insérer une note de bas de page', 'simple-footnotes-editor-button' ) . '",
+				title : "' . __( 'Insert footnote', 'simple-footnotes-editor-button' ) . '",
 				image : "' . plugins_url( 'footnote-icon.png', __FILE__ ) . '",
 				onclick : function() {
 					ed.windowManager.open({
@@ -62,7 +62,7 @@ class simple_footnotes_editor_button {
 						width : 480,
 						height : "auto",
 						wpDialog : true,
-						title : "' . __( 'Insérer une note de bas de page', 'simple-footnotes-editor-button' ) . '"
+						title : "' . __( 'Insert footnote', 'simple-footnotes-editor-button' ) . '"
 					});
 				}
 			});
@@ -100,11 +100,11 @@ class simple_footnotes_editor_button {
 		<div style="display:none;">
 			<form id="simple-footnotes-editor-button" tabindex="-1">
 				<div style="margin: 1em">
-					<p class="howto"><?php _e( 'Entrer le contenu de la note de bas de page', 'simple-footnotes-editor-button' ); ?></p>
+					<p class="howto"><?php _e( 'Insert footnote', 'simple-footnotes-editor-button' ); ?></p>
 					<textarea id="simple-footnotes-editor-button-content" rows="4" style="width: 95%; margin-bottom: 1em"></textarea>
 					<div class="submitbox" style="margin-bottom: 1em">
 						<div id="simple-footnotes-editor-button-insert" class="alignright">
-							<input type="submit" value="<?php esc_attr_e( 'Insérer', 'simple-footnotes-editor-button' ); ?>" class="button-primary">
+							<input type="submit" value="<?php esc_attr_e( 'Insert', 'simple-footnotes-editor-button' ); ?>" class="button-primary">
 						</div>
 						<div id="simple-footnotes-editor-button-cancel">
 							<a class="submitdelete deletion" href="#"><?php _e( 'Cancel' ); ?></a>
@@ -123,7 +123,7 @@ class simple_footnotes_editor_button {
 				// Now that we have the footnote content, clear the textarea
 				$content.val('');
 				if (footnote.length)
-					tinyMCE.activeEditor.execCommand('mceInsertContent', false, '[ref]' + footnote + '[/ref]');
+					tinyMCE.activeEditor.execCommand('mceInsertContent', false, '[footnote]' + footnote + '[/footnote]');
 				
 				tinyMCEPopup.close();
 				evt.preventDefault();
